@@ -1,0 +1,19 @@
+# Fichiers Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environnements virtuels
+venv/
+venv_ml/
+
+# Fichiers Jupyter
+.ipynb_checkpoints/
+
+# Fichiers volumineux
+*.pkl
+*.csv
+
+# Variables d'environnement
+.env
