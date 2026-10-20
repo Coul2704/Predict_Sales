@@ -11,8 +11,8 @@ d'une commande sans connaître le prix ni la quantité.
 
 ## 🤖 Modèle retenu
 - **XGBoost + log1p + Feature Engineering**
-- R² : 0.7778
-- MAE : 746.85
+- R² : 0,7794
+- MAE : 748,58
 
 ## 🛠️ Technologies
 - Python 3.11
