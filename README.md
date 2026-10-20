@@ -25,7 +25,7 @@ d'une commande sans connaître le prix ni la quantité.
 ## 🚀 Installation
 
 ### 1. Cloner le projet
-git clone https://github.com/Coul2704/Predict-Sales.git
+git clone https://github.com/Coul2704/Predict_Sales.git
 cd predict-sales
 
 ### 2. Installer les dépendances
