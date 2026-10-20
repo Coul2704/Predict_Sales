@@ -1,19 +1,32 @@
 # Fichiers Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
 
 # Environnements virtuels
+.venv/
 venv/
 venv_ml/
 
 # Fichiers Jupyter
 .ipynb_checkpoints/
 
-# Fichiers volumineux
+# Fichiers volumineux ignorés par défaut
 *.pkl
 *.csv
 
+# Exceptions : fichiers nécessaires au projet
+!data/
+data/*
+!data/Auto Sales data.csv
+
+!models/
+models/*
+!models/sales_pipeline.pkl
+
 # Variables d'environnement
 .env
+.env.*
+
+# Fichiers système
+.DS_Store
+Thumbs.db
