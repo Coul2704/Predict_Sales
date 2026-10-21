@@ -20,7 +20,9 @@ Le projet comprend un pipeline de Machine Learning, une API REST avec FastAPI et
 - **Période étudiée :** 2018–2020
 - **Variable cible :** `SALES`
 
-Les variables exploitées comprennent notamment la gamme de produits, la taille de la commande, le pays, le statut et des indicateurs historiques calculés à partir des ventes antérieures.
+Les variables exploitées comprennent notamment la gamme de produits, la taille de la commande, le pays, le statut et des indicateurs historiques calculés à partir des ventes antérieures. Le CSV source utilise des dates au format jour/mois/année. Les statistiques historiques utilisées au moment de la prédiction doivent exclure les ventes datées du jour prédit et les ventes futures.
+
+**Données et confidentialité :** avant toute diffusion publique, vérifie la licence et la provenance du jeu de données. Si les colonnes de contact (téléphone, adresse et noms de contact) ne sont pas nécessaires au projet, retire-les de la version publiée.
 
 ## Modèle retenu
 
@@ -114,7 +116,13 @@ Dans un second terminal, active le même environnement virtuel, puis exécute :
 python -m streamlit run dashboard/streamlit_app.py
 ```
 
-Le dashboard doit communiquer avec l'API en cours d'exécution.
+Le dashboard doit communiquer avec l'API en cours d'exécution. Par défaut, il appelle `http://127.0.0.1:8000/predire`. Tu peux définir `PREDICT_SALES_API_URL` pour utiliser une autre adresse. La documentation interactive est accessible à la racine de l'API suivie de `/docs`.
+
+## Limites à garder en tête
+
+- Les résultats publiés dans ce README sont ceux rapportés lors de l'expérimentation ; ils doivent être reproduits avec le notebook et le pipeline versionnés pour être considérés comme vérifiés.
+- Une prédiction à une date postérieure à la période du dataset est une extrapolation et peut être moins fiable.
+- Le statut de commande doit être disponible au moment réel de la prévision. Si ce n'est pas le cas, il faut retirer cette variable et réentraîner le modèle.
 
 ## Auteur
 
