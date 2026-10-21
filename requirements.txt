@@ -1,4 +1,3 @@
-```txt
 # Analyse et manipulation des données
 pandas==3.0.3
 numpy==2.4.4
@@ -20,4 +19,3 @@ requests==2.34.2
 
 # Visualisation
 matplotlib==3.11.2
-```
