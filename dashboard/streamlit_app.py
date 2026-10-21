@@ -41,8 +41,9 @@ st.markdown(
 @st.cache_data
 def charger_donnees(chemin):
     df = pd.read_csv(chemin)
+    # Le CSV source utilise le format jour/mois/année.
     df["ORDERDATE"] = pd.to_datetime(
-        df["ORDERDATE"], errors="coerce"
+        df["ORDERDATE"], format="%d/%m/%Y", errors="coerce"
     )
     df = df.dropna(subset=["ORDERDATE"]).copy()
 
@@ -94,9 +95,15 @@ api_url = st.sidebar.text_input(
     ),
 ).strip().rstrip("/")
 
+api_base_url = (
+    api_url[:-len("/predire")]
+    if api_url.endswith("/predire")
+    else api_url
+)
+docs_url = f"{api_base_url}/docs"
+
 st.sidebar.markdown(
-    "[Ouvrir la documentation de l'API]"
-    "(http://127.0.0.1:8000/docs)"
+    f"[Ouvrir la documentation de l'API]({docs_url})"
 )
 
 
@@ -188,8 +195,8 @@ historique_disponible = historique[
 ]
 
 historique_client = historique_disponible[
-    historique_disponible["CUSTOMERNAME"].astype(str).str.strip()
-    == client.strip()
+    historique_disponible["CUSTOMERNAME"].astype(str).str.strip().str.casefold()
+    == client.strip().casefold()
 ]
 
 col_a, col_b, col_c = st.columns(3)
@@ -274,6 +281,7 @@ if st.button(
                 not isinstance(prediction, (int, float))
                 or isinstance(prediction, bool)
                 or not pd.notna(prediction)
+                or not float("-inf") < float(prediction) < float("inf")
             ):
                 st.error(
                     "La réponse de l'API ne contient pas "
