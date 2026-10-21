@@ -30,8 +30,9 @@ pipeline = joblib.load(MODEL_PATH)
 
 # Charger les données historiques
 historique = pd.read_csv(DATA_PATH)
+# Le CSV source utilise le format jour/mois/année (ex. 24/02/2018).
 historique["ORDERDATE"] = pd.to_datetime(
-    historique["ORDERDATE"], errors="coerce"
+    historique["ORDERDATE"], format="%d/%m/%Y", errors="coerce"
 )
 historique["SALES"] = pd.to_numeric(
     historique["SALES"], errors="coerce"
@@ -231,6 +232,8 @@ def predire(data: DonneesCommande):
             "statistiques_historiques": stats,
         }
 
+    except HTTPException:
+        raise
     except Exception:
         logger.exception("Échec lors de la prédiction")
         raise HTTPException(
